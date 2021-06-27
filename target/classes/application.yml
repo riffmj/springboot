@@ -1,0 +1,24 @@
+#server:
+#  port: 8001
+
+spring:
+  mvc:
+    view:
+      prefix: /pages/
+      suffix: .html
+  servlet:
+    multipart:
+      max-request-size: 80MB   #控制请求可以上传文件得大小大小  默认为10MB  单位可以为MB 和KB
+      max-file-size: 80MB        #真正用来控制实际文件上传大小限制   默认值为1MB 单位为MB
+      #让max-file-size比max-request-size大或者相等较好，因为如果不行得话可以在请求得时候就拒绝，不在走后面得类型
+#  web:
+#    resources:
+#      static-locations: /META-INF/resources/,classpath:/resources/,classpath:/static/ #访问的时候不用加static路径即可
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+
+

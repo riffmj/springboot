@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="pragma" content="no-cache">
+    </meta>
+    <meta http-equiv="cache-control" content="no-cache">
+    </meta>
+    <meta http-equiv="expires" content="0">
+    </meta>
+    <title>Insert title here</title>
+    <script type="text/javascript" src="/jquery-3.3.1/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<p>用ajax上传表单数据及文件</p>
+<form id="uploadFile" method="post" enctype="multipart/form-data" >
+    学号：<input id="studentNo" name="studentNo" type="text"></br>
+    姓名：<input id="studentName" name="studentName" type="text"></br>
+    性别：<input id="studentSex" name="studentSex" type="text"></br>
+    头像：<input id="file" name="file" type="file"></br>
+  <input type="button" value="添加" onclick="checkForm()">
+</form>
+<p>用表单提交方式上传表单数据及文件</p>
+<form id="studentAddForm1" method="post" enctype="multipart/form-data" action="/hello2">
+    学号1：<input id="studentNo1" name="studentNo" type="text"></br>
+    姓名1：<input id="studentName1" name="studentName" type="text"></br>
+    性别1：<input id="studentSex1" name="studentSex" type="text"></br>
+    头像1：<input id="file1" name="file" type="file"></br>
+    <input type="submit" value="添加" >
+</form>
+<script type="text/javascript">
+    function checkForm() {
+        //var studentNo = document.getElementById('studentNo').value;
+        //var studentNo = $("#studentNo").val();
+        var data = $("#studentAddForm").serialize();//上传表单全部数据
+        var formData =new FormData($("#uploadFile")[0]);
+        //ajax提交表单数据
+        $.ajax({
+            type: "POST",
+            contentType: false, //上传文件的时候要设置为false
+            processData: false, //上传文件的时候要设置为false
+            url: "/hello2",
+            data: formData,
+            async: false, //则所有的请求均为同步请求，在没有返回值之前，同步请求将锁住浏览器，用户其它操作必须等待请求完成才可以执行。
+            success: function(data1, status) {
+                var	ss = data1;
+                if(ss=='手持用户'){
+                    alert("可以");
+                    //window.location.href = "menuSelect/menuSelect.html";
+                }else{
+                    alert("非手持用户不允许登录！");
+                }
+            },
+            error:function (request){
+                alert("出错了");
+            }
+        });
+    }
+
+
+</script>
+
+</body>
+</html>
